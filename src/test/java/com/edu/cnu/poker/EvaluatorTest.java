@@ -39,4 +39,32 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("FLUSH"));
     }
+
+    @Test
+    public void RANK가_2개가동일하면_원페어다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(1,Suit.CLUBS),
+                new Card(1,Suit.HEARTS),
+                new Card(8,Suit.CLUBS),
+                new Card(13,Suit.DIAMONDS),
+                new Card(2,Suit.HEARTS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("ONEPAIR"));
+    }
+    @Test
+    public void RANK가_2개가동일하면_트리플이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(1,Suit.CLUBS),
+                new Card(1,Suit.HEARTS),
+                new Card(8,Suit.CLUBS),
+                new Card(13,Suit.DIAMONDS),
+                new Card(1,Suit.DIAMONDS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("TRIPLE"));
+    }
+
 }
