@@ -1,5 +1,6 @@
 package com.edu.cnu.poker;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,11 @@ public class Evaluator {
     public String evaluate(List<Card> cardList) {
         int num_twopair = 0;
         int num_triple = 0;
+
+        Collections.sort(cardList);
+
+        System.out.println(cardList.toString());
+
         Map<Suit, Integer> tempMap_suit = new HashMap<Suit, Integer>();
         Map<Integer, Integer> tempMap_rank = new HashMap<Integer, Integer>();
 
@@ -43,29 +49,25 @@ public class Evaluator {
         for (Integer key : tempMap_rank.keySet()) {
             if (tempMap_rank.get(key) == 4) {
                 return "FOUROFAKIND";
-            }
-            else if (tempMap_rank.get(key) == 3) {
+            } else if (tempMap_rank.get(key) == 3) {
                 num_triple++;
-            }
-            else if (tempMap_rank.get(key) == 2) {
+            } else if (tempMap_rank.get(key) == 2) {
                 num_twopair++;
             }
         }
 
-        if(num_triple == 1){
-            if(num_twopair == 1){
+        if (num_triple == 1) {
+            if (num_twopair == 1) {
                 return "FULLHOUSE";
             }
             return "THREEOFAKIND";
         }
 
-        if(num_twopair == 2){
+        if (num_twopair == 2) {
             return "TWOPAIR";
-        }
-        else if(num_twopair == 1){
+        } else if (num_twopair == 1) {
             return "ONEPAIR";
-        }
-        else {
+        } else {
             return "NOTHING";
         }
 
