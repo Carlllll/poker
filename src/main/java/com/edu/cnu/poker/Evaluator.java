@@ -9,6 +9,8 @@ import java.util.Map;
  */
 public class Evaluator {
     public String evaluate(List<Card> cardList) {
+        int num_twopair = 0;
+        int num_triple = 0;
         Map<Suit, Integer> tempMap_suit = new HashMap<Suit, Integer>();
         Map<Integer, Integer> tempMap_rank = new HashMap<Integer, Integer>();
 
@@ -39,13 +41,33 @@ public class Evaluator {
         }
 
         for (Integer key : tempMap_rank.keySet()) {
-            if (tempMap_rank.get(key) == 3) {
-                return "TRIPLE";
+            if (tempMap_rank.get(key) == 4) {
+                return "FOUROFAKIND";
+            }
+            else if (tempMap_rank.get(key) == 3) {
+                num_triple++;
             }
             else if (tempMap_rank.get(key) == 2) {
-                return "ONEPAIR";
+                num_twopair++;
             }
         }
-        return "NOTHING";
+
+        if(num_triple == 1){
+            if(num_twopair == 1){
+                return "FULLHOUSE";
+            }
+            return "THREEOFAKIND";
+        }
+
+        if(num_twopair == 2){
+            return "TWOPAIR";
+        }
+        else if(num_twopair == 1){
+            return "ONEPAIR";
+        }
+        else {
+            return "NOTHING";
+        }
+
     }
 }
