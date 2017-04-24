@@ -25,6 +25,12 @@ public class Evaluator {
             if (tempMap.get(key) == 5) {
                 return "FLUSH";
             }
+            else if(tempMap.get(key) == 2){
+                return "ONE_PAIR";
+            }
+            else {
+                return "NO_PAIR";
+            }
         }
         return "NOTHING";
     }
