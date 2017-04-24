@@ -16,8 +16,6 @@ public class Evaluator {
         Collections.sort(cardList);
         Collections.reverse(cardList);
 
-        System.out.println(cardList);
-
         Map<Suit, Integer> tempMap_suit = new HashMap<Suit, Integer>();
         Map<Integer, Integer> tempMap_rank = new HashMap<Integer, Integer>();
 
@@ -29,14 +27,17 @@ public class Evaluator {
 
         for (Suit key : tempMap_suit.keySet()) {
             if (tempMap_suit.get(key) == 5) {
-                if (isSuccessive(tempMap_rank)){
+                if (isSuccessive(cardList)){
+                    if(cardList.get(0).getRank()==13){
+                        return "ROYALSTRAIGHTFLUSH";
+                    }
                     return "STRAIGHTFLUSH";
                 }
                 return "FLUSH";
             }
         }
 
-        if(isSuccessive(tempMap_rank)){
+        if(isSuccessive(cardList)){
             return "STRAIGHT";
         }
 
@@ -94,19 +95,16 @@ public class Evaluator {
         }
     }
 
-    private boolean isSuccessive(Map<Integer, Integer> tempMap_rank) {
-        int temp = -1;
-        int sum = 0;
-
-        for (Integer key : tempMap_rank.keySet()) {
-            if (temp == -1) {
-                temp = key;
-            } else {
-                sum = sum + (key - temp);
-                temp = key;
-            }
+    private boolean isSuccessive(List<Card> cardList) {
+        int i = 0;
+        if(cardList.get(i).getRank()==0){
+            cardList.get(i).setRank(14);
         }
-        if (sum == 4) {
+        while(cardList.get(i).getRank() - cardList.get(i+1).getRank() == 1 && i < 3){
+            i++;
+        }
+
+        if (i == 3) {
             return true;
         } else {
             return false;
