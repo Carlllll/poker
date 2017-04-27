@@ -2,6 +2,8 @@ package com.edu.cnu.poker;
 
 import java.io.*;
 
+import static java.lang.System.*;
+
 //player 클래스는 점수를 가지고 있고,
 // round 변수를 가지고 있어서 라운드마다 점수를 집계한 뒤,
 // 승자를 결정한다
@@ -16,14 +18,17 @@ public class Player {
 	private int Score = 0;
 	private int Sumofscore = 0;
 	private int RoundCount = 0;
+	private int firstScore;
 
-	public Player(BufferedReader buf, Card card){ // 하나이상의 플레이어를 정의하기 위한 player 클래스
-		this.card = card;
+	BufferedReader buf = null;
+
+	public Player(BufferedReader buf){ // 하나이상의 플레이어를 정의하기 위한 player 클래스
 		this.score = 0;
-    }
+		card = null;
+	}
 
-	private boolean DrawAgain(BufferedReader buf){
-		System.out.print("Do you want more game? (y/n): ");
+	private boolean DrawAgain(){
+		out.print("Do you want more game? (y/n): ");
 		try {
 			String input = buf.readLine();
 			if(input.equals("n"))
@@ -44,6 +49,17 @@ public class Player {
 	}
 
 	public void takeTurn(int Round){
+		do{
+			if(RoundCount == 0){
+				this.firstScore = score;
+				this.Sumofscore = this.firstScore;
+				out.print("Your first score is " + this.Sumofscore + " ");
+			}
+
+			RoundCount++;
+		}while(DrawAgain());
+
+
 
 	}
 
