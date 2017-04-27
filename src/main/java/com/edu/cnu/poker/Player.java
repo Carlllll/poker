@@ -17,14 +17,12 @@ public class Player {
 	private int Sumofscore = 0;
 	private int RoundCount = 0;
 
-	BufferedReader buf = new BufferedReader();
-
-	public Player(Card card){ // 하나이상의 플레이어를 정의하기 위한 player 클래스
+	public Player(BufferedReader buf, Card card){ // 하나이상의 플레이어를 정의하기 위한 player 클래스
 		this.card = card;
 		this.score = 0;
     }
 
-	private boolean DrawAgain(){
+	private boolean DrawAgain(BufferedReader buf){
 		System.out.print("Do you want more game? (y/n): ");
 		try {
 			String input = buf.readLine();
@@ -48,6 +46,5 @@ public class Player {
 	public void takeTurn(int Round){
 
 	}
-
 
 }
