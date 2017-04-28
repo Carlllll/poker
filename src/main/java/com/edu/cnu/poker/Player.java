@@ -8,7 +8,7 @@ import static java.lang.System.*;
 // round 변수를 가지고 있어서 라운드마다 점수를 집계한 뒤,
 // 승자를 결정한다
 // round를 주고 받으려면 플레이어가 turn을 주고 받으면서 각자의 게임을 진행해야한다 (taketurn 함수)
-// DrawAgain 함수를 이용하여 게임을 계속 이어가고 싶은경우 true, 그만 하겠다 하면 falsea로 리턴하게 해준다
+// DrawAgain 함수를 이용하여 게임을 계속 이어가고 싶은경우 true, 그만 하겠다 하면 false로 리턴하게 해준다
 //
 //
 public class Player {
@@ -48,12 +48,12 @@ public class Player {
 		return this.Score;
 	}
 
-	public void takeTurn(int Round){
+	public void takeTurn(){
 		do{
 			if(RoundCount == 0){
 				this.firstScore = score;
 				this.Sumofscore = this.firstScore;
-				out.print("Your first score is " + this.Sumofscore + " ");
+				System.out.println("Your first score is " + this.Sumofscore + " ");
 			}
 
 			RoundCount++;
